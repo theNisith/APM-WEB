@@ -1,16 +1,17 @@
-/* Modern Eye-Catching Styles */
+/* Modern Dark Theme with Consistent Typography */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary: #0062cc;
-  --secondary: #005299;
-  --accent: #00b3e6;
-  --dark: #333;
-  --light: #f8f9fa;
-  --success: #28a745;
-  --text: #212529;
-  --card-bg: #f9fafc;
-  --border-color: #e6e9f0;
+  --primary: #007acc;        /* Bright blue */
+  --secondary: #005fa3;      /* Darker blue */
+  --accent: #FFD700;         /* Gold accent */
+  --dark-bg: #121212;        /* Very dark background */
+  --card-bg: #1e1e1e;        /* Slightly lighter than background */
+  --section-bg: #242424;     /* Section background */
+  --text-primary: #f0f0f0;   /* Light text */
+  --text-secondary: #cccccc; /* Slightly dimmer text */
+  --text-accent: #FFD700;    /* Gold text for emphasis */
+  --border-color: #333333;   /* Dark borders */
 }
 
 * {
@@ -22,14 +23,15 @@
 body {
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;
-  color: var(--text);
-  background-color: var(--light);
+  color: var(--text-primary);
+  background: var(--dark-bg);
   overflow-x: hidden;
+  background-color: var(--dark-bg) !important;
 }
 
-/* Eye-catching Header and Navbar */
+/* Header styling */
 header {
-  background: linear-gradient(135deg, #0062cc, #001a33);
+  background: linear-gradient(135deg, #222, #000);
   position: relative;
   overflow: hidden;
 }
@@ -41,11 +43,11 @@ header::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-  background-size: cover;
+  background: rgba(0, 0, 0, 0.6);
   z-index: 1;
 }
 
+/* Navigation styling */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -61,9 +63,15 @@ header::before {
   font-family: 'Montserrat', sans-serif;
   font-size: 2rem;
   font-weight: 800;
-  color: #fff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  color: var(--text-primary);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   letter-spacing: 1px;
+}
+
+.logo img {
+  height: 50px;
+  vertical-align: middle;
+  margin-right: 10px;
 }
 
 .nav-links {
@@ -75,14 +83,13 @@ header::before {
   margin: 0 3px;
 }
 
-/* Update the navigation hover effect to be more professional */
 .nav-links a {
-  color: #fff;
+  color: var(--accent);
   text-decoration: none;
   font-weight: 600;
   padding: 0.7rem 1.2rem;
   border-radius: 4px;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.3s ease;
   position: relative;
 }
 
@@ -99,7 +106,7 @@ header::before {
 }
 
 .nav-links a:hover {
-  color: var(--accent);
+  color: var(--text-primary);
 }
 
 .nav-links a:hover::after {
@@ -107,17 +114,12 @@ header::before {
 }
 
 .nav-links a.active {
-  color: var(--accent);
+  color: var(--primary);
 }
 
 .nav-links a.active::after {
   width: 70%;
-  background-color: var(--accent);
-}
-
-/* Remove the previous ::before pseudo-element */
-.nav-links a::before {
-  content: none;
+  background-color: var(--primary);
 }
 
 .header-content {
@@ -131,47 +133,64 @@ header h1 {
   font-family: 'Montserrat', sans-serif;
   font-size: 2.8rem;
   font-weight: 700;
-  color: white;
+  color: var(--accent);
   margin-bottom: 1rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   animation: fadeIn 1s ease-out;
 }
 
 header p {
   font-size: 1.3rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
   max-width: 700px;
   margin: 0 auto;
   font-weight: 300;
   animation: slideUp 1s ease-out 0.3s both;
 }
 
-/* Main Content Styling */
+/* Main content styling */
 main {
   padding: 3rem 5%;
   max-width: 1400px;
   margin: 0 auto;
+  position: relative;
 }
 
+main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  opacity: 0.05;
+  z-index: -1;
+}
+
+/* Section styling */
 section {
   margin-bottom: 3rem;
   animation: fadeIn 1s ease-out;
-  background-color: var(--card-bg);
+  background-color: var(--section-bg);
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   padding: 2rem;
   border: 1px solid var(--border-color);
+  position: relative;
+  z-index: 1;
 }
 
 section h2 {
   font-family: 'Montserrat', sans-serif;
-  color: var(--primary);
+  color: var(--text-accent);
   margin-bottom: 1.5rem;
   font-size: 2rem;
   position: relative;
   padding-bottom: 12px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 section h2::after {
@@ -181,68 +200,111 @@ section h2::after {
   bottom: 0;
   width: 60px;
   height: 4px;
-  background: var(--accent);
+  background: var(--primary);
   border-radius: 2px;
 }
 
-/* Eye-catching Cards */
+section p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.8;
+  color: var(--text-primary) !important;
+  margin-bottom: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.01rem;
+}
+
+/* Card styling */
+.card-content {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  padding: 1.8rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-content h3 {
+  color: var(--accent);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+}
+
+.card-content p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  color: var(--text-primary) !important;
+  margin-bottom: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.01rem;
+}
+
+.card-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Team and project cards */
 .team-card, .project-card {
-  background: var(--card-bg);
+  background-color: var(--card-bg);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-  transition: all 0.4s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.5s ease;
   margin-bottom: 2.5rem;
   position: relative;
   border: 1px solid var(--border-color);
+  background-color: var(--section-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
 }
 
 .team-card:hover, .project-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
-}
-
-/* Remove the gradient overlay on hover for more professional look */
-.team-card::before, .project-card::before {
-  content: none;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
 .team-card img, .project-card img {
   width: 100%;
-  height: 280px;
+  height: auto;
+  max-height: 250px;
   object-fit: cover;
   transition: transform 0.4s ease;
 }
 
 .team-card:hover img, .project-card:hover img {
-  transform: scale(1.03); /* Subtle scale for professional look */
-}
-
-.card-content {
-  padding: 1.8rem;
-  background-color: var(--card-bg);
+  transform: scale(1.03);
 }
 
 .team-card h2, .project-card h2 {
-  color: var(--dark);
-  font-size: 1.5rem;
-  margin-bottom: 0.8rem;
-  font-weight: 600;
+  color: var(--accent);
 }
 
 .team-card p, .project-card p {
-  color: #555;
-  margin-bottom: 0.8rem;
-  line-height: 1.6;
+  color: var(--text-secondary);
 }
 
-/* Eye-catching Footer */
+/* Footer styling */
 footer {
-  background: linear-gradient(to right, #001a33, #003366);
-  color: white;
+  background: linear-gradient(to right, #000, #111);
+  color: var(--text-secondary);
   padding: 3rem 0;
   position: relative;
   overflow: hidden;
+  background-color: var(--section-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
 }
 
 footer::before {
@@ -252,8 +314,7 @@ footer::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" fill-opacity="1" d="M0,32L48,37.3C96,43,192,53,288,90.7C384,128,480,192,576,197.3C672,203,768,149,864,122.7C960,96,1056,96,1152,112C1248,128,1344,160,1392,176L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
-  background-size: cover;
+  background: rgba(0, 0, 0, 0.8);
   z-index: 1;
 }
 
@@ -282,72 +343,61 @@ footer::before {
 .contact-info p {
   margin: 0.7rem 0;
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-secondary);
 }
 
-copyright {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 1.5rem;
-  width: 80%;
-  text-align: center;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
+footer a {
+  color: var(--accent);
+  text-decoration: none;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+footer a:hover {
+  text-decoration: underline;
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Grid Layout for Team and Projects */
+/* Grid layout */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 2.5rem;
+  padding: 1rem 0;
+  background-blend-mode: normal;
+  background-image: none;
 }
 
-/* Additional Professional Touches */
-.section-title {
-  position: relative;
+/* Button styling */
+.btn-link {
   display: inline-block;
-  margin-bottom: 2rem;
-}
-
-.section-title::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -10px;
-  width: 40px;
-  height: 3px;
+  padding: 0.7rem 1.5rem;
   background-color: var(--primary);
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Enhance list styles */
+.btn-link:hover {
+  background-color: var(--secondary);
+}
+
+/* List styling */
 ul:not(.nav-links) {
   list-style-type: none;
+  padding: 0.5rem 0;
 }
 
 ul:not(.nav-links) li {
   position: relative;
   padding-left: 1.5rem;
   margin-bottom: 0.7rem;
+  color: var(--text-secondary);
 }
 
 ul:not(.nav-links) li::before {
@@ -359,6 +409,45 @@ ul:not(.nav-links) li::before {
   height: 8px;
   border-radius: 50%;
   background-color: var(--primary);
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Strong and emphasis styling */
+strong, em {
+  color: var(--accent);
+  font-weight: 600;
+  color: var(--accent) !important;
+}
+
+/* Image styling */
+section img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin: 1rem 0;
+}
+
+/* Counter number styling */
+.counter-number {
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin: 0.5rem 0;
+  text-align: center;
+  display: block;
+  color: var(--accent) !important;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 /* Responsiveness */
@@ -394,4 +483,86 @@ ul:not(.nav-links) li::before {
   header p {
     font-size: 1rem;
   }
+  
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Improve text readability with increased contrast */
+p, li, a {
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+/* Ensure card content is dark themed */
+.card-content {
+  background-color: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+/* Force dark theme for all elements that might have inconsistent styling */
+section, .team-card, .project-card, main, footer {
+  background-color: var(--section-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Enhance contrast for important information */
+strong, b, em, i {
+  color: var(--accent) !important;
+}
+
+/* Ensure headings are visible */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-accent) !important;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+}
+
+/* Remove any light-colored backgrounds that may be affecting readability */
+.grid-container, .card-content, section, main {
+  background-blend-mode: normal;
+  background-image: none;
+}
+
+/* Add subtle glow to important elements for better visibility */
+.card-content h3, section h2 {
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+}
+
+/* Improve the visual hierarchy with stronger contrast */
+.card-content {
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Ensure counters are visible */
+.counter-number {
+  color: var(--accent) !important;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+/* Contrast for special sections */
+section:has(img[alt="Our Vision"]), 
+section:nth-child(odd), 
+section:nth-child(even) {
+  background: var(--section-bg) !important;
+  position: relative;
+}
+
+/* Add subtle pattern overlay instead of image backgrounds */
+section:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: -1;
 }

@@ -300,88 +300,6 @@ document.addEventListener('DOMContentLoaded', function() {
         animate();
     };
     
-    // Create floating engineering elements (gears, motors, tools, etc.)
-    const createFloatingElements = () => {
-        const main = document.querySelector('main');
-        if (!main) return;
-        
-        // Engineering element SVG definitions
-        const engineeringElements = [
-            // Gear
-            `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="#8B4513" stroke-width="1.5"/>
-                <path d="M14.1213 14.1213L16.2426 16.2426M14.1213 9.87868L16.2426 7.75736M9.87868 14.1213L7.75736 16.2426M9.87868 9.87868L7.75736 7.75736M15 12H18M12 15V18M12 9V6M9 12H6" stroke="#8B4513" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M12.9 3H11.1L10.5 4.5L9 4.9L7.7 4L6.4 5.3L7.3 6.6L6.9 8.1L5.4 8.7V10.5L6.9 11.1L7.3 12.6L6.4 13.9L7.7 15.2L9 14.3L10.5 14.7L11.1 16.2H12.9L13.5 14.7L15 14.3L16.3 15.2L17.6 13.9L16.7 12.6L17.1 11.1L18.6 10.5V8.7L17.1 8.1L16.7 6.6L17.6 5.3L16.3 4L15 4.9L13.5 4.5L12.9 3Z" stroke="#8B4513" stroke-width="1.5"/>
-            </svg>`,
-            
-            // Motor/engine
-            `<svg width="50" height="30" viewBox="0 0 50 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="5" y="5" width="40" height="20" rx="2" stroke="#8B4513" stroke-width="1.5"/>
-                <circle cx="15" cy="15" r="5" stroke="#8B4513" stroke-width="1.5"/>
-                <circle cx="35" cy="15" r="5" stroke="#8B4513" stroke-width="1.5"/>
-                <line x1="20" y1="15" x2="30" y2="15" stroke="#8B4513" stroke-width="1.5"/>
-                <line x1="0" y1="15" x2="5" y2="15" stroke="#8B4513" stroke-width="1.5"/>
-                <line x1="45" y1="15" x2="50" y2="15" stroke="#8B4513" stroke-width="1.5"/>
-            </svg>`,
-            
-            // Blueprint/technical drawing
-            `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="3" y="3" width="18" height="18" rx="2" stroke="#8B4513" stroke-width="1.5"/>
-                <line x1="3" y1="7" x2="21" y2="7" stroke="#8B4513" stroke-width="1"/>
-                <line x1="7" y1="3" x2="7" y2="21" stroke="#8B4513" stroke-width="1"/>
-                <line x1="12" y1="3" x2="12" y2="21" stroke="#8B4513" stroke-width="1"/>
-                <line x1="17" y1="3" x2="17" y2="21" stroke="#8B4513" stroke-width="1"/>
-                <line x1="3" y1="12" x2="21" y2="12" stroke="#8B4513" stroke-width="1"/>
-                <line x1="3" y1="17" x2="21" y2="17" stroke="#8B4513" stroke-width="1"/>
-                <circle cx="12" cy="12" r="3" stroke="#8B4513" stroke-width="1"/>
-            </svg>`,
-            
-            // Wrench
-            `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 19.5L15.5 8M6 4C6 5.10457 5.10457 6 4 6C2.89543 6 2 5.10457 2 4C2 2.89543 2.89543 2 4 2C5.10457 2 6 2.89543 6 4ZM14 16C14 17.1046 13.1046 18 12 18C10.8954 18 10 17.1046 10 16C10 14.8954 10.8954 14 12 14C13.1046 14 14 14.8954 14 16ZM22 8C22 9.10457 21.1046 10 20 10C18.8954 10 18 9.10457 18 8C18 6.89543 18.8954 6 20 6C21.1046 6 22 6.89543 22 8Z" stroke="#8B4513" stroke-width="1.5"/>
-            </svg>`
-        ];
-        
-        // Create container for floating elements
-        const floatingContainer = document.createElement('div');
-        floatingContainer.className = 'floating-elements-container';
-        main.appendChild(floatingContainer);
-        
-        // Create 8-12 random engineering elements
-        const elementCount = Math.floor(Math.random() * 5) + 8;
-        
-        for (let i = 0; i < elementCount; i++) {
-            const floatingEl = document.createElement('div');
-            floatingEl.className = 'floating-element';
-            
-            // Select random engineering element
-            const randomElementIndex = Math.floor(Math.random() * engineeringElements.length);
-            floatingEl.innerHTML = engineeringElements[randomElementIndex];
-            
-            // Random position
-            const xPos = Math.random() * 100; // percent
-            const yPos = Math.random() * 100; // percent
-            
-            // Random starting rotation
-            const rotation = Math.random() * 360;
-            
-            // Random animation duration and delay
-            const duration = 20 + Math.random() * 40; // seconds
-            const delay = Math.random() * -20; // seconds
-            
-            // Set styles
-            floatingEl.style.left = `${xPos}%`;
-            floatingEl.style.top = `${yPos}%`;
-            floatingEl.style.transform = `rotate(${rotation}deg)`;
-            floatingEl.style.animationDuration = `${duration}s`;
-            floatingEl.style.animationDelay = `${delay}s`;
-            floatingEl.style.opacity = 0.07 + Math.random() * 0.05;
-            
-            floatingContainer.appendChild(floatingEl);
-        }
-    };
-    
-    createFloatingElements();
     createParticleBackground();
     
     // Add smooth scroll behavior to navigation links
@@ -429,42 +347,37 @@ document.addEventListener('DOMContentLoaded', function() {
             pointer-events: none;
         }
         
-        /* Classic engineering color scheme for middle section - without blue underlines */
+        /* Dark theme consistent styles */
         body {
-            background-color: #f0f4f8;
-            color: #2c3e50;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
         }
         
         main {
-            background: linear-gradient(to bottom, #f0f4f8, #e6eef5);
+            background: linear-gradient(to bottom, #121212, #181818);
         }
         
         section {
-            background-color: #f7fafc;
-            border: 1px solid #d1dce7;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            background-color: var(--section-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
         
         .team-card, .project-card {
-            background-color: #ffffff;
-            border: 1px solid #d1dce7;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
         }
         
         h2 {
-            color: #34495e;
-            /* Removed the blue underline */
+            color: var(--text-accent);
             padding-bottom: 5px;
         }
         
         h3 {
-            color: #2980b9;
+            color: var(--accent);
         }
         
-        /* Modified blueprint-inspired grid background - more subtle */
-        main {
-            position: relative;
-        }
-        
+        /* Modified blueprint-inspired grid background - darker for dark theme */
         main::before {
             content: "";
             position: absolute;
@@ -473,98 +386,11 @@ document.addEventListener('DOMContentLoaded', function() {
             right: 0;
             bottom: 0;
             background-image: 
-                linear-gradient(rgba(240, 244, 248, 0.5) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(240, 244, 248, 0.5) 1px, transparent 1px);
-            background-size: 40px 40px; /* Larger, more subtle grid */
-            background-position: center;
-            z-index: -1;
-        }
-        
-        /* Classic engineering color scheme with brown accents */
-        body {
-            background-color: #f4f0e8; /* Slightly warmer background */
-            color: #48392a; /* Brown text color */
-        }
-        
-        main {
-            background: linear-gradient(to bottom, #f4f0e8, #e8dfd0);
-        }
-        
-        section {
-            background-color: #f9f6f0; /* Warm white */
-            border: 1px solid #d8cbb8; /* Brown border */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-        
-        .team-card, .project-card {
-            background-color: #ffffff;
-            border: 1px solid #d8c3a5; /* Warm brown border */
-        }
-        
-        h2 {
-            color: #8b5a2b; /* Brown heading */
-            padding-bottom: 5px;
-            border-bottom: 2px solid #a67c52; /* Brown underline */
-            display: inline-block;
-        }
-        
-        h3 {
-            color: #6b4423; /* Darker brown for subheadings */
-        }
-        
-        /* Modified blueprint-inspired grid background with brown tones */
-        main {
-            position: relative;
-        }
-        
-        main::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                linear-gradient(rgba(183, 154, 129, 0.2) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(183, 154, 129, 0.2) 1px, transparent 1px);
+                linear-gradient(rgba(50, 50, 50, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(50, 50, 50, 0.3) 1px, transparent 1px);
             background-size: 40px 40px;
             background-position: center;
             z-index: -1;
-        }
-        
-        /* Floating engineering elements */
-        .floating-elements-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none; /* Don't interfere with clicks */
-            z-index: -1;
-        }
-        
-        .floating-element {
-            position: absolute;
-            animation: float-around 30s linear infinite;
-        }
-        
-        @keyframes float-around {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            25% {
-                transform: translate(50px, 25px) rotate(90deg);
-            }
-            50% {
-                transform: translate(0, 50px) rotate(180deg);
-            }
-            75% {
-                transform: translate(-50px, 25px) rotate(270deg);
-            }
-            100% {
-                transform: translate(0, 0) rotate(360deg);
-            }
         }
     `;
     document.head.appendChild(style);
@@ -688,14 +514,14 @@ document.addEventListener('DOMContentLoaded', function() {
             overflow: hidden;
             z-index: 1;
             border-radius: 6px;
-            background-color: #f7fafc;
-            border: 1px solid #d1dce7;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         
         .enhanced-box:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         /* Removed the blue top border on boxes */
@@ -714,9 +540,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         .counter-number {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             font-weight: bold;
-            color: #2c3e50; /* Changed from blue to dark gray */
+            color: var(--accent);
             margin: 0.5rem 0;
         }
         
@@ -731,45 +557,34 @@ document.addEventListener('DOMContentLoaded', function() {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        /* Engineering-themed box styling with brown accents */
-        .enhanced-box {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            border-radius: 6px;
-            background-color: #faf6f0; /* Warm white */
-            border: 1px solid #d2b48c; /* Tan border */
-            box-shadow: 0 2px 5px rgba(139, 69, 19, 0.05); /* Brown shadow */
-        }
-        
-        .enhanced-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.1); /* Brown shadow on hover */
-        }
-        
-        .counter-number {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #8b4513; /* Brown counter numbers */
-            margin: 0.5rem 0;
-        }
-        
-        /* Brown accents for engineering title */
-        .title-decoration {
-            color: rgba(139, 69, 19, 0.6); /* Brown for decorative elements */
-        }
-        
-        .engineering-title {
-            color: #f0e6d2; /* Warm light color for title */
-            text-shadow: 0 0 5px rgba(139, 69, 19, 0.3); /* Brown glow */
-        }
-        
-        /* Modified particles for footer to use brown */
-        .particle-canvas {
-            opacity: 0.6; /* Make more visible */
-        }
     `;
     document.head.appendChild(enhancedStyle);
+    
+    // Enhanced background parallax effects
+    window.addEventListener('scroll', function() {
+        const scrollPosition = window.pageYOffset;
+        
+        // Parallax effect for sections with different engineering backgrounds
+        document.querySelectorAll('section').forEach((section, index) => {
+            // Different speeds for different sections
+            const speed = 0.05 + (index * 0.01);
+            section.style.backgroundPosition = `center ${-scrollPosition * speed}px`;
+        });
+        
+        // Subtle parallax for the teal machinery header
+        const header = document.querySelector('header');
+        if (header) {
+            header.style.backgroundPosition = `center ${-scrollPosition * 0.2}px`;
+        }
+        
+        // Subtle parallax for the robotic background footer
+        const footer = document.querySelector('footer');
+        if (footer) {
+            const footerPos = footer.offsetTop;
+            const footerParallax = (scrollPosition - footerPos) * 0.15;
+            if (scrollPosition > footerPos - window.innerHeight) {
+                footer.style.backgroundPosition = `center ${footerParallax}px`;
+            }
+        }
+    });
 });
