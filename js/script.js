@@ -587,4 +587,29 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    // Theme toggle functionality
+    const themeToggle = document.querySelector('.theme-toggle');
+    
+    // Check for saved theme preference or use device preference
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const savedTheme = localStorage.getItem('theme');
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+        document.body.classList.add('dark-theme');
+    }
+    
+    // Toggle theme when button is clicked
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            
+            // Save preference to localStorage
+            if (document.body.classList.contains('dark-theme')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    }
 });

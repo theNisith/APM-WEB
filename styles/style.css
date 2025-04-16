@@ -1,17 +1,57 @@
-/* Modern Dark Theme with Consistent Typography */
+/* Modern Theme with Dark/Light Toggle */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
 
+/* Theme Variables */
 :root {
-  --primary: #007acc;        /* Bright blue */
-  --secondary: #005fa3;      /* Darker blue */
-  --accent: #FFD700;         /* Gold accent */
-  --dark-bg: #121212;        /* Very dark background */
-  --card-bg: #1e1e1e;        /* Slightly lighter than background */
-  --section-bg: #242424;     /* Section background */
-  --text-primary: #f0f0f0;   /* Light text */
-  --text-secondary: #cccccc; /* Slightly dimmer text */
-  --text-accent: #FFD700;    /* Gold text for emphasis */
-  --border-color: #333333;   /* Dark borders */
+  /* Light Theme (default) */
+  --light-primary: #0062cc;
+  --light-secondary: #005299;
+  --light-accent: #004080;
+  --light-bg: #f5f7fa;
+  --light-card-bg: #ffffff;
+  --light-section-bg: #f0f4f8;
+  --light-text-primary: #333333;
+  --light-text-secondary: #555555;
+  --light-text-accent: #0062cc;
+  --light-border-color: #e6e9f0;
+  
+  /* Dark Theme */
+  --dark-primary: #007acc;
+  --dark-secondary: #005fa3;
+  --dark-accent: #FFD700;
+  --dark-bg: #121212;
+  --dark-card-bg: #1e1e1e;
+  --dark-section-bg: #242424;
+  --dark-text-primary: #f0f0f0;
+  --dark-text-secondary: #cccccc;
+  --dark-text-accent: #FFD700;
+  --dark-border-color: #333333;
+  
+  /* Default Theme (Light) */
+  --primary: var(--light-primary);
+  --secondary: var(--light-secondary);
+  --accent: var(--light-accent);
+  --bg: var(--light-bg);
+  --card-bg: var(--light-card-bg);
+  --section-bg: var(--light-section-bg);
+  --text-primary: var(--light-text-primary);
+  --text-secondary: var(--light-text-secondary);
+  --text-accent: var(--light-text-accent);
+  --border-color: var(--light-border-color);
+}
+
+/* Dark Theme Class */
+body.dark-theme {
+  --primary: var(--dark-primary);
+  --secondary: var(--dark-secondary);
+  --accent: var(--dark-accent);
+  --bg: var(--dark-bg);
+  --card-bg: var(--dark-card-bg);
+  --section-bg: var(--dark-section-bg);
+  --text-primary: var(--dark-text-primary);
+  --text-secondary: var(--dark-text-secondary);
+  --text-accent: var(--dark-text-accent);
+  --border-color: var(--dark-border-color);
 }
 
 * {
@@ -24,16 +64,71 @@ body {
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;
   color: var(--text-primary);
-  background: var(--dark-bg);
+  background-color: var(--bg);
   overflow-x: hidden;
-  background-color: var(--dark-bg) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme Toggle Styles */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.theme-toggle-track {
+  width: 50px;
+  height: 24px;
+  background-color: #555;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0 3px;
+  justify-content: space-between;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle-thumb {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: white;
+  transition: transform 0.3s ease;
+  left: 3px;
+}
+
+body.dark-theme .theme-toggle-thumb {
+  transform: translateX(26px);
+}
+
+body.dark-theme .theme-toggle-track {
+  background-color: #007acc;
+}
+
+.theme-icon {
+  color: white;
+  font-size: 12px;
+  z-index: 1;
+}
+
+.sun-icon {
+  margin-left: 4px;
+}
+
+.moon-icon {
+  margin-right: 4px;
 }
 
 /* Header styling */
 header {
-  background: linear-gradient(135deg, #222, #000);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
   position: relative;
   overflow: hidden;
+  transition: background 0.3s ease;
 }
 
 header::before {
@@ -57,6 +152,11 @@ header::before {
   z-index: 10;
   backdrop-filter: blur(5px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
 }
 
 .logo {
@@ -156,6 +256,7 @@ main {
   max-width: 1400px;
   margin: 0 auto;
   position: relative;
+  background-color: var(--bg);
 }
 
 main::before {
@@ -205,31 +306,24 @@ section h2::after {
 }
 
 section p {
-  color: var(--text-secondary);
-  margin-bottom: 1rem;
-  line-height: 1.8;
-  color: var(--text-primary) !important;
+  color: var(--text-primary);
   margin-bottom: 1.2rem;
   font-weight: 400;
   letter-spacing: 0.01rem;
+  line-height: 1.8;
 }
 
 /* Card styling */
 .card-content {
   background-color: var(--card-bg);
   color: var(--text-primary);
-  padding: 1.8rem;
+  padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
   border: 1px solid var(--border-color);
-  background-color: var(--card-bg) !important;
-  color: var(--text-primary) !important;
-  border: 1px solid var(--border-color) !important;
-  padding: 2rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .card-content h3 {
@@ -237,14 +331,12 @@ section p {
   margin-bottom: 1rem;
   font-size: 1.5rem;
   font-weight: 600;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
 }
 
 .card-content p {
-  color: var(--text-secondary);
+  color: var(--text-primary);
   line-height: 1.6;
-  color: var(--text-primary) !important;
   margin-bottom: 1.2rem;
   font-weight: 400;
   letter-spacing: 0.01rem;
@@ -265,9 +357,6 @@ section p {
   margin-bottom: 2.5rem;
   position: relative;
   border: 1px solid var(--border-color);
-  background-color: var(--section-bg) !important;
-  color: var(--text-primary) !important;
-  border-color: var(--border-color) !important;
 }
 
 .team-card:hover, .project-card:hover {
@@ -298,13 +387,10 @@ section p {
 /* Footer styling */
 footer {
   background: linear-gradient(to right, #000, #111);
-  color: var(--text-secondary);
+  color: var(--text-primary);
   padding: 3rem 0;
   position: relative;
   overflow: hidden;
-  background-color: var(--section-bg) !important;
-  color: var(--text-primary) !important;
-  border-color: var(--border-color) !important;
 }
 
 footer::before {
@@ -361,8 +447,6 @@ footer a:hover {
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 2.5rem;
   padding: 1rem 0;
-  background-blend-mode: normal;
-  background-image: none;
 }
 
 /* Button styling */
@@ -423,10 +507,9 @@ ul:not(.nav-links) li::before {
 }
 
 /* Strong and emphasis styling */
-strong, em {
+strong, em, b, i {
   color: var(--accent);
   font-weight: 600;
-  color: var(--accent) !important;
 }
 
 /* Image styling */
@@ -442,12 +525,10 @@ section img {
 .counter-number {
   font-size: 3.5rem;
   font-weight: bold;
-  color: var(--primary);
+  color: var(--accent);
   margin: 0.5rem 0;
   text-align: center;
   display: block;
-  color: var(--accent) !important;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 /* Responsiveness */
@@ -487,82 +568,13 @@ section img {
   .grid-container {
     grid-template-columns: 1fr;
   }
-}
-
-/* Improve text readability with increased contrast */
-p, li, a {
-  line-height: 1.8;
-  font-size: 1.05rem;
-}
-
-/* Ensure card content is dark themed */
-.card-content {
-  background-color: var(--card-bg) !important;
-  color: var(--text-primary) !important;
-  border: 1px solid var(--border-color) !important;
-}
-
-/* Force dark theme for all elements that might have inconsistent styling */
-section, .team-card, .project-card, main, footer {
-  background-color: var(--section-bg) !important;
-  color: var(--text-primary) !important;
-  border-color: var(--border-color) !important;
-}
-
-/* Enhance contrast for important information */
-strong, b, em, i {
-  color: var(--accent) !important;
-}
-
-/* Ensure headings are visible */
-h1, h2, h3, h4, h5, h6 {
-  color: var(--text-accent) !important;
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
-}
-
-/* Remove any light-colored backgrounds that may be affecting readability */
-.grid-container, .card-content, section, main {
-  background-blend-mode: normal;
-  background-image: none;
-}
-
-/* Add subtle glow to important elements for better visibility */
-.card-content h3, section h2 {
-  text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
-}
-
-/* Improve the visual hierarchy with stronger contrast */
-.card-content {
-  padding: 2rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Ensure counters are visible */
-.counter-number {
-  color: var(--accent) !important;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-}
-
-/* Contrast for special sections */
-section:has(img[alt="Our Vision"]), 
-section:nth-child(odd), 
-section:nth-child(even) {
-  background: var(--section-bg) !important;
-  position: relative;
-}
-
-/* Add subtle pattern overlay instead of image backgrounds */
-section:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 20px 20px;
-  pointer-events: none;
-  z-index: -1;
+  
+  .theme-toggle {
+    margin-top: 1rem;
+    margin-left: 0;
+  }
+  
+  .nav-container {
+    flex-direction: column;
+  }
 }
