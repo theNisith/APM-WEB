@@ -1,57 +1,19 @@
-/* Modern Theme with Dark/Light Toggle */
+/* Modern Dark Theme Only */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
 
-/* Theme Variables */
+/* Theme Variables - Dark Theme Only */
 :root {
-  /* Light Theme (default) */
-  --light-primary: #0062cc;
-  --light-secondary: #005299;
-  --light-accent: #004080;
-  --light-bg: #f5f7fa;
-  --light-card-bg: #ffffff;
-  --light-section-bg: #f0f4f8;
-  --light-text-primary: #333333;
-  --light-text-secondary: #555555;
-  --light-text-accent: #0062cc;
-  --light-border-color: #e6e9f0;
-  
-  /* Dark Theme */
-  --dark-primary: #007acc;
-  --dark-secondary: #005fa3;
-  --dark-accent: #FFD700;
-  --dark-bg: #121212;
-  --dark-card-bg: #1e1e1e;
-  --dark-section-bg: #242424;
-  --dark-text-primary: #f0f0f0;
-  --dark-text-secondary: #cccccc;
-  --dark-text-accent: #FFD700;
-  --dark-border-color: #333333;
-  
-  /* Default Theme (Light) */
-  --primary: var(--light-primary);
-  --secondary: var(--light-secondary);
-  --accent: var(--light-accent);
-  --bg: var(--light-bg);
-  --card-bg: var(--light-card-bg);
-  --section-bg: var(--light-section-bg);
-  --text-primary: var(--light-text-primary);
-  --text-secondary: var(--light-text-secondary);
-  --text-accent: var(--light-text-accent);
-  --border-color: var(--light-border-color);
-}
-
-/* Dark Theme Class */
-body.dark-theme {
-  --primary: var(--dark-primary);
-  --secondary: var(--dark-secondary);
-  --accent: var(--dark-accent);
-  --bg: var(--dark-bg);
-  --card-bg: var(--dark-card-bg);
-  --section-bg: var(--dark-section-bg);
-  --text-primary: var(--dark-text-primary);
-  --text-secondary: var(--dark-text-secondary);
-  --text-accent: var(--dark-text-accent);
-  --border-color: var(--dark-border-color);
+  /* Dark Theme Variables */
+  --primary: #007acc;
+  --secondary: #005fa3;
+  --accent: #FFD700;
+  --bg: #121212;
+  --card-bg: #1e1e1e;
+  --section-bg: #242424;
+  --text-primary: #f0f0f0;
+  --text-secondary: #cccccc;
+  --text-accent: #FFD700;
+  --border-color: #333333;
 }
 
 * {
@@ -69,58 +31,14 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Theme Toggle Styles */
-.theme-toggle {
-  display: flex;
-  align-items: center;
-  margin-left: 1rem;
-  cursor: pointer;
-  position: relative;
-}
-
-.theme-toggle-track {
-  width: 50px;
-  height: 24px;
-  background-color: #555;
-  border-radius: 30px;
-  display: flex;
-  align-items: center;
-  padding: 0 3px;
-  justify-content: space-between;
-  position: relative;
-  transition: background-color 0.3s ease;
-}
-
-.theme-toggle-thumb {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background-color: white;
-  transition: transform 0.3s ease;
-  left: 3px;
-}
-
-body.dark-theme .theme-toggle-thumb {
-  transform: translateX(26px);
-}
-
-body.dark-theme .theme-toggle-track {
-  background-color: #007acc;
-}
-
-.theme-icon {
-  color: white;
-  font-size: 12px;
-  z-index: 1;
-}
-
-.sun-icon {
-  margin-left: 4px;
-}
-
+/* Remove theme toggle styles completely */
+.theme-toggle,
+.theme-toggle-track,
+.theme-toggle-thumb,
+.theme-icon,
+.sun-icon,
 .moon-icon {
-  margin-right: 4px;
+  display: none !important;
 }
 
 /* Header styling */
@@ -364,16 +282,23 @@ section p {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
-.team-card img, .project-card img {
+.team-card img {
+  width: 100%;
+  height: 300px; /* Fixed height for consistency */
+  object-fit: contain; /* Changed from cover to contain to avoid cropping */
+  background-color: #111; /* Dark background for transparent images */
+  transition: transform 0.4s ease;
+  padding: 5px; /* Small padding to prevent edge bleeding */
+  image-rendering: -webkit-optimize-contrast; /* Improves image sharpness */
+  image-rendering: crisp-edges;
+}
+
+.project-card img {
   width: 100%;
   height: auto;
   max-height: 250px;
   object-fit: cover;
   transition: transform 0.4s ease;
-}
-
-.team-card:hover img, .project-card:hover img {
-  transform: scale(1.03);
 }
 
 .team-card h2, .project-card h2 {
@@ -429,7 +354,7 @@ footer::before {
 .contact-info p {
   margin: 0.7rem 0;
   font-size: 1.1rem;
-  color: var(--text-secondary);
+  color: var (--text-secondary);
 }
 
 footer a {
@@ -531,6 +456,98 @@ section img {
   display: block;
 }
 
+/* Copyable content styles */
+.copyable {
+  position: relative;
+  cursor: pointer;
+  padding-bottom: 1px;
+  transition: background-color 0.2s;
+}
+
+.copyable:hover {
+  background-color: rgba(255, 215, 0, 0.1);
+}
+
+.copyable:active {
+  background-color: rgba(255, 215, 0, 0.2);
+}
+
+.copy-icon {
+  font-size: 0.8em;
+  margin-left: 4px;
+  opacity: 0.7;
+}
+
+.copy-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--card-bg);
+  color: var(--accent);
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  white-space: nowrap;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+  z-index: 100;
+}
+
+.copyable:hover .copy-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.copy-tooltip.show {
+  opacity: 1;
+  visibility: visible;
+  background-color: var(--accent);
+  color: var(--card-bg);
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  position: relative;
+  margin: 10% auto;
+  padding: 20px;
+  width: 80%;
+  background: #fff;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.modal-images img {
+  width: 30%;
+  margin: 10px;
+  border-radius: 8px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 /* Responsiveness */
 @media (max-width: 768px) {
   .navbar {
@@ -570,11 +587,15 @@ section img {
   }
   
   .theme-toggle {
-    margin-top: 1rem;
-    margin-left: 0;
+    display: none !important;
   }
   
   .nav-container {
     flex-direction: column;
+  }
+
+  .copy-tooltip {
+    bottom: -30px;
+    font-size: 0.7rem;
   }
 }

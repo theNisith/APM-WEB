@@ -324,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Add CSS animations dynamically
+    // Add CSS animations dynamically - force dark theme
     const style = document.createElement('style');
     style.textContent = `
         @keyframes blink-caret {
@@ -391,6 +391,12 @@ document.addEventListener('DOMContentLoaded', function() {
             background-size: 40px 40px;
             background-position: center;
             z-index: -1;
+        }
+        
+        /* Force dark theme styles consistently */
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
         }
     `;
     document.head.appendChild(style);
@@ -588,28 +594,93 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Theme toggle functionality
-    const themeToggle = document.querySelector('.theme-toggle');
-    
-    // Check for saved theme preference or use device preference
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-    const savedTheme = localStorage.getItem('theme');
-    
-    if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
-        document.body.classList.add('dark-theme');
-    }
-    
-    // Toggle theme when button is clicked
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
+    // Remove theme toggle functionality entirely
+    document.body.classList.add('dark-theme'); // Always use dark theme
+    localStorage.setItem('theme', 'dark'); // Always save dark theme preference
+
+    // Make emails and phone numbers copyable
+    function makeCopyable() {
+        // Find all elements containing phone numbers or emails
+        document.querySelectorAll('.contact-info p, .team-card p').forEach(element => {
+            const text = element.textContent;
             
-            // Save preference to localStorage
-            if (document.body.classList.contains('dark-theme')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
+            // Replace phone numbers with clickable spans
+            if (text.includes('📞') || text.includes('📱')) {
+                const phoneRegex = /(\+\d{1,4}\s?\d{1,}[\s-]?\d{1,}[\s-]?\d{1,})/g;
+                let updatedText = text;
+                let match;
+                
+                while (match = phoneRegex.exec(text)) {
+                    const phoneNumber = match[1];
+                    updatedText = updatedText.replace(
+                        phoneNumber,
+                        `<span class="copyable" data-value="${phoneNumber.replace(/\s/g, '')}">${phoneNumber} <span class="copy-icon">📋</span><span class="copy-tooltip">Click to copy</span></span>`
+                    );
+                }
+                
+                element.innerHTML = updatedText;
+            }
+            
+            // Replace emails with clickable spans
+            if (text.includes('📧') || text.includes('@')) {
+                const emailRegex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/g;
+                let updatedText = text;
+                let match;
+                
+                while (match = emailRegex.exec(text)) {
+                    const email = match[1];
+                    updatedText = updatedText.replace(
+                        email,
+                        `<span class="copyable" data-value="${email}">${email} <span class="copy-icon">📋</span><span class="copy-tooltip">Click to copy</span></span>`
+                    );
+                }
+                
+                element.innerHTML = updatedText;
             }
         });
+        
+        // Add click event listener to copyable elements
+        document.querySelectorAll('.copyable').forEach(element => {
+            element.addEventListener('click', function() {
+                const textToCopy = this.getAttribute('data-value');
+                
+                // Create temporary textarea element to copy text
+                const textarea = document.createElement('textarea');
+                textarea.value = textToCopy;
+                textarea.setAttribute('readonly', '');
+                textarea.style.position = 'absolute';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                
+                // Select and copy the text
+                textarea.select();
+                document.execCommand('copy');
+                
+                // Remove the temporary element
+                document.body.removeChild(textarea);
+                
+                // Show copied feedback
+                const tooltip = this.querySelector('.copy-tooltip');
+                tooltip.textContent = 'Copied!';
+                tooltip.classList.add('show');
+                
+                // Reset tooltip after 2 seconds
+                setTimeout(() => {
+                    tooltip.textContent = 'Click to copy';
+                    tooltip.classList.remove('show');
+                }, 2000);
+            });
+        });
     }
+    
+    // Call the function to make content copyable
+    makeCopyable();
 });
+
+function openModal() {
+  document.getElementById("waterProjectModal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("waterProjectModal").style.display = "none";
+}
